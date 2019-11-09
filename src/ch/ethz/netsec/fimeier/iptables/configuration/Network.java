@@ -9,9 +9,9 @@ import javax.json.JsonValue;
 public class Network {
 	JsonObject networkJson;
 
-	ArrayList<Integer> routers = new ArrayList<Integer>();
-	ArrayList<Subnet> subnets = new ArrayList<Subnet>();
-	ArrayList<Link> links = new ArrayList<Link>();
+	public ArrayList<Integer> routers = new ArrayList<Integer>();
+	public ArrayList<Subnet> subnets = new ArrayList<Subnet>();
+	public ArrayList<Link> links = new ArrayList<Link>();
 
 	public class Subnet {
 		int id;

@@ -3,12 +3,12 @@ package ch.ethz.netsec.fimeier.iptables.configuration;
 import javax.json.JsonObject;
 
 public class IPTableConfiguration {
-	String testName = "";
-	JsonObject testCaseJson = null;
+	public String testName = "";
+	public JsonObject testCaseJson = null;
 
-	int testID = 0;
-	Communications comm;
-	Network net;
+	public int testID;
+	public Communications comm;
+	public Network net;
 
 	public IPTableConfiguration(String _testName, JsonObject _testCaseJson) {
 		testName = _testName;

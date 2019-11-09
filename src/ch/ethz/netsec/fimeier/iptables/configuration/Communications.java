@@ -10,7 +10,7 @@ import javax.json.JsonValue;
 public class Communications {
 	JsonArray communicationsJson;
 
-	ArrayList<ComDetails> communications = new ArrayList<ComDetails>();
+	public ArrayList<ComDetails> communications = new ArrayList<ComDetails>();
 
 	public class ComDetails {
 		int sourceSubnetId;
