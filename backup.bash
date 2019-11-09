@@ -2,5 +2,5 @@
 
 
 git add .
-git commit -m "backup"
+git commit -m "$1"
 git push
