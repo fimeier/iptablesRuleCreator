@@ -7,7 +7,7 @@ public class IPTableConfiguration {
 	public JsonObject testCaseJson = null;
 
 	public int testID;
-	public Communications comm;
+	public Communication comm;
 	public Network net;
 
 	public IPTableConfiguration(String _testName, JsonObject _testCaseJson) {
@@ -21,7 +21,7 @@ public class IPTableConfiguration {
 		net = new Network(testCaseJson.getJsonObject("network"));
 
 		// get network part
-		comm = new Communications(testCaseJson.getJsonArray("communications"));
+		comm = new Communication(testCaseJson.getJsonArray("communications"));
 
 		return;
 	}

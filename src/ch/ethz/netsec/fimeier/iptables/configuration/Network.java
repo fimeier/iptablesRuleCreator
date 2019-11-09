@@ -9,14 +9,19 @@ import javax.json.JsonValue;
 public class Network {
 	JsonObject networkJson;
 
-	public ArrayList<Integer> routers = new ArrayList<Integer>();
 	public ArrayList<Subnet> subnets = new ArrayList<Subnet>();
 	public ArrayList<Link> links = new ArrayList<Link>();
+	public ArrayList<Router> routers = new ArrayList<Router>();
+
 
 	public class Subnet {
-		int id;
-		String address;
-		int prefix;
+		public int id;
+		public String address;
+		public int prefix;
+
+		//Relations
+		public ArrayList<Link> subnetLinks = new ArrayList<>();
+		
 
 		Subnet(JsonObject subnet) {
 			id = subnet.getInt("id");
@@ -26,10 +31,15 @@ public class Network {
 	}
 
 	public class Link {
-		int routerId;
-		String interfaceId;
-		String ip;
-		int subnetId;
+		public int routerId;
+		public String interfaceId;
+		public String ip;
+		public int subnetId;
+
+		//Relations
+		public Subnet subnet = null;
+		public Router router = null;
+
 
 		Link(JsonObject link) {
 			routerId = link.getInt("routerId");
@@ -39,12 +49,23 @@ public class Network {
 		}
 	}
 
+	public class Router {
+		public int id;
+
+		//Relations
+		public ArrayList<Link> routerLinks = new ArrayList<>();
+		
+		Router(int _id) {
+			id = _id;
+		}
+	}
+
 	Network(JsonObject _networkJson) {
 		networkJson = _networkJson;
 
 		// get router id
 		for (JsonValue routerID : networkJson.getJsonArray("routers")) {
-			routers.add(routerID.asJsonObject().getInt("id"));
+			routers.add(new Router(routerID.asJsonObject().getInt("id")));
 		}
 
 		// get subnets

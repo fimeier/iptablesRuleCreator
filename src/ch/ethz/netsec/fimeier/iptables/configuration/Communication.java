@@ -6,21 +6,27 @@ import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.json.JsonValue;
 
+import ch.ethz.netsec.fimeier.iptables.configuration.Network.Link;
 
-public class Communications {
+
+public class Communication {
 	JsonArray communicationsJson;
 
 	public ArrayList<ComDetails> communications = new ArrayList<ComDetails>();
 
 	public class ComDetails {
-		int sourceSubnetId;
-		int targetSubnetId;
-		String protocol;
-		int sourcePortStart;
-		int sourcePortEnd;
-		int targetPortStart;
-		int targetPortEnd;
-		String direction;
+		public int sourceSubnetId;
+		public int targetSubnetId;
+		public String protocol;
+		public int sourcePortStart;
+		public int sourcePortEnd;
+		public int targetPortStart;
+		public int targetPortEnd;
+		public String direction;
+
+		//Relations
+		public ArrayList<Link> path = new ArrayList<>();
+
 
 		ComDetails(JsonObject com) {
 			sourceSubnetId = com.getInt("sourceSubnetId");
@@ -34,7 +40,7 @@ public class Communications {
 		}
 	}
 
-	Communications(JsonArray _communicationsJson) {
+	Communication(JsonArray _communicationsJson) {
 		communicationsJson = _communicationsJson;
 
 		// get comDetails
