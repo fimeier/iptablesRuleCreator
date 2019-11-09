@@ -19,6 +19,8 @@ public class Network {
 		public String address;
 		public int prefix;
 
+		public String ipAndPrefix;
+
 		//Relations
 		public ArrayList<Link> subnetLinks = new ArrayList<>();
 		
@@ -27,6 +29,8 @@ public class Network {
 			id = subnet.getInt("id");
 			address = subnet.getString("address");
 			prefix = subnet.getInt("prefix");
+
+			ipAndPrefix = address +"/" + prefix;
 		}
 	}
 
@@ -51,6 +55,8 @@ public class Network {
 
 	public class Router {
 		public int id;
+
+		public String rules;
 
 		//Relations
 		public ArrayList<Link> routerLinks = new ArrayList<>();

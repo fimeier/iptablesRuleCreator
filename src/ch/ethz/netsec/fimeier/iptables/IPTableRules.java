@@ -7,6 +7,7 @@ import ch.ethz.netsec.fimeier.iptables.configuration.Communication.ComDetails;
 import ch.ethz.netsec.fimeier.iptables.configuration.Network.Subnet;
 import ch.ethz.netsec.fimeier.iptables.configuration.Network.Link;
 import ch.ethz.netsec.fimeier.iptables.configuration.Network.Router;
+import ch.ethz.netsec.fimeier.iptables.helper.Pair;
 import ch.ethz.netsec.fimeier.iptables.helper.Tripple;
 
 import java.util.ArrayList;
@@ -48,14 +49,52 @@ public class IPTableRules {
 
         debugPrintPath();
 
-        for (Router router : routers) {
-            String routerID = ((Integer) router.id).toString();
-            String rule = "blubs";
+        collectAllRules();
+
+        for (Router r : routers) {
+            String routerID = ((Integer) r.id).toString();
+
+            String rule = "* nat" + "\n"
+            +":OUTPUT ACCEPT [0:0]"+ "\n"
+            +":PREROUTING ACCEPT [0:0]"+ "\n"
+            +":POSTROUTING ACCEPT [0:0]"+ "\n"+ "\n"
+            
+            +"COMMIT"+ "\n"+ "\n"
+            
+            +"* filter"+ "\n"
+            +":INPUT DROP [0:0]"+ "\n"
+            +":OUTPUT DROP [0:0]"+ "\n"
+            +":FORWARD DROP [0:0]"+ "\n"
+
+            + r.rules+ "\n"+ "\n"
+            + "COMMIT";
             rules.add(new Tripple<String, String, String>(testID, routerID, rule));
         }
     }
 
     
+
+    private void collectAllRules() {
+        HashMap<Router,String> routerRules = new HashMap<>();
+        for (ComDetails c : communications){
+            for(Pair<Router,String> routerRule: c.getRules()){
+                Router r = routerRule.getKey();
+                String newRule = routerRule.getValue1();
+                String existingRules = "";
+                if (routerRules.containsKey(r)){
+                    existingRules = routerRules.get(r) +"\n";
+
+                }
+                existingRules += newRule;
+                routerRules.put(r, existingRules); 
+            }
+        }
+
+        for (Router r: routerRules.keySet()){
+            r.rules = routerRules.get(r);
+        }
+
+    }
 
     private void debugPrintPath() {
         for (ComDetails c : communications){

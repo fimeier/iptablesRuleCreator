@@ -1,1 +1,19 @@
-blubs
+* nat
+:OUTPUT ACCEPT [0:0]
+:PREROUTING ACCEPT [0:0]
+:POSTROUTING ACCEPT [0:0]
+
+COMMIT
+
+* filter
+:INPUT DROP [0:0]
+:OUTPUT DROP [0:0]
+:FORWARD DROP [0:0]
+-A FORWARD -p udp --sport 63419:63453 --dport 30527:30595 -s 96.0.0.0/7 -d 10.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED  -j ACCEPT
+
+-A FORWARD -p tcp --sport 35406:35475 --dport 2166:2180 -s 96.0.0.0/7 -d 10.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED  -j ACCEPT
+
+-A FORWARD -p tcp --sport 46118:46215 --dport 45206:45272 -s 96.0.0.0/7 -d 10.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED  -j ACCEPT
+
+
+COMMIT
