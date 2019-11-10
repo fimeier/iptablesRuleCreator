@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mvn verify
 
 git add .
 git commit -m "$1"

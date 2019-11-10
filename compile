@@ -2,4 +2,4 @@
 
 echo "Compile your project here"
 
-mvn verify
+#mvn verify
