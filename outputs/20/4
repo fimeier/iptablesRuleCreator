@@ -10,23 +10,16 @@ COMMIT
 :OUTPUT DROP [0:0]
 :FORWARD DROP [0:0]
 -A FORWARD -p udp --sport 44671:44679 --dport 36997:37003 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state NEW,ESTABLISHED -j ACCEPT
-
 -A FORWARD -p udp --sport 27470:27509 --dport 28334:28377 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state NEW,ESTABLISHED -j ACCEPT
-
 -A FORWARD -p tcp --sport 39680:39689 --dport 16636:16679 -s 40.0.0.0/7 -d 8.0.0.0/7 -i eth3 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 16636:16679 --dport 39680:39689 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state ESTABLISHED -j ACCEPT
-
 -A FORWARD -p tcp --sport 29623:29667 --dport 58392:58417 -s 40.0.0.0/7 -d 8.0.0.0/7 -i eth3 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 58392:58417 --dport 29623:29667 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state ESTABLISHED -j ACCEPT
-
 -A FORWARD -p udp --sport 23622:23708 --dport 43191:43287 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 43191:43287 --dport 23622:23708 -s 40.0.0.0/7 -d 8.0.0.0/7 -i eth3 -o eth0 -m state --state ESTABLISHED -j ACCEPT
-
 -A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 40.0.0.0/7 -d 8.0.0.0/7 -i eth3 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state ESTABLISHED -j ACCEPT
-
 -A FORWARD -p udp --sport 20817:20881 --dport 44010:44096 -s 40.0.0.0/7 -d 8.0.0.0/7 -i eth3 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 44010:44096 --dport 20817:20881 -s 8.0.0.0/7 -d 40.0.0.0/7 -i eth0 -o eth3 -m state --state ESTABLISHED -j ACCEPT
-
 
 COMMIT

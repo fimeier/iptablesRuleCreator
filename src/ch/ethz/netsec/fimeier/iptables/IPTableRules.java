@@ -47,7 +47,7 @@ public class IPTableRules {
 
         findPath();
 
-        debugPrintPath();
+        //debugPrintPath();
 
         collectAllRules();
 
@@ -66,7 +66,7 @@ public class IPTableRules {
             +":OUTPUT DROP [0:0]"+ "\n"
             +":FORWARD DROP [0:0]"+ "\n"
 
-            + r.rules+ "\n"+ "\n"
+            + r.rules+ "\n"
             + "COMMIT";
             rules.add(new Tripple<String, String, String>(testID, routerID, rule));
         }
@@ -82,7 +82,7 @@ public class IPTableRules {
                 String newRule = routerRule.getValue1();
                 String existingRules = "";
                 if (routerRules.containsKey(r)){
-                    existingRules = routerRules.get(r) +"\n";
+                    existingRules = routerRules.get(r);
 
                 }
                 existingRules += newRule;
