@@ -67,12 +67,12 @@ public class Communication {
 					Subnet nextSubnet = nextLink.subnet;
 
 					// TODO was ist mit unidirectional
-					String state = ((direction.equals("bidirectional")) ? "NEW,ESTABLISHED" : "ESTABLISHED");
+					String state = ((direction.equals("bidirectional")|| direction.equals("unidirectional")) ? "NEW,ESTABLISHED" : "ESTABLISHED");
 
 					String rule = "-A FORWARD" + " -p " + protocol + " --sport " + sourcePortStart + ":" + sourcePortEnd
 							+ " --dport " + targetPortStart + ":" + targetPortEnd + " -s " + s.ipAndPrefix + " -d "
 							+ nextSubnet.ipAndPrefix + " -i " + l.interfaceId + " -o " + nextLink.interfaceId
-							+ " -m state" + " --state " + state + "  -j ACCEPT" + "\n";
+							+ " -m state" + " --state " + state + " -j ACCEPT" + "\n";
 
 					rulesForThisRouter += rule;
 
@@ -81,7 +81,9 @@ public class Communication {
 						rule = "-A FORWARD" + " -p " + protocol + " --sport " + targetPortStart + ":" + targetPortEnd
 								+ " --dport " + sourcePortStart + ":" + sourcePortEnd + " -s " + nextSubnet.ipAndPrefix
 								+ " -d " + s.ipAndPrefix + " -i " + nextLink.interfaceId + " -o " + l.interfaceId
-								+ " -m state" + " --state " + "ESTABLISHED" + "  -j ACCEPT" + "\n";
+								+ " -m state" + " --state " + "ESTABLISHED" + " -j ACCEPT" + "\n";
+						
+								rulesForThisRouter += rule;
 
 					}
 
