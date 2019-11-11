@@ -53,6 +53,10 @@ public class Communication {
 				Link l = path.get(i);
 				Subnet s = l.subnet;
 				Router r = l.router;
+
+				Subnet sourceSubnet = path.get(0).subnet;
+				Subnet targetSubnet = path.get(path.size()-1).subnet;
+
 				// pathLength++;
 				boolean nextIsSubnet = (i % 2 == 1) ? true : false;
 
@@ -76,7 +80,8 @@ public class Communication {
 					rule += (protocol.equals("icmp")) ? " --icmp-type any" : "";
 					rule += (protocol.equals("icmp")) ? "" : " --sport " + sourcePortStart + ":" + sourcePortEnd;
 					rule += (protocol.equals("icmp")) ? "" : " --dport " + targetPortStart + ":" + targetPortEnd;
-					rule += " -s " + s.ipAndPrefix + " -d " + nextSubnet.ipAndPrefix;
+					//rule += " -s " + s.ipAndPrefix + " -d " + nextSubnet.ipAndPrefix;
+					rule += " -s " + sourceSubnet.ipAndPrefix + " -d " + targetSubnet.ipAndPrefix;
 					rule += " -i " + l.interfaceId + " -o " + nextLink.interfaceId;
 					rule += " -m state" + " --state " + state + " -j ACCEPT" + "\n";
 
@@ -89,7 +94,8 @@ public class Communication {
 						rule += (protocol.equals("icmp")) ? " --icmp-type any" : "";
 						rule += (protocol.equals("icmp")) ? "" : " --sport " + targetPortStart + ":" + targetPortEnd;
 						rule += (protocol.equals("icmp")) ? "" : " --dport " + sourcePortStart + ":" + sourcePortEnd;
-						rule += " -s " + nextSubnet.ipAndPrefix + " -d " + s.ipAndPrefix;
+						//rule += " -s " + nextSubnet.ipAndPrefix + " -d " + s.ipAndPrefix;
+						rule += " -s " + targetSubnet.ipAndPrefix + " -d " + sourceSubnet.ipAndPrefix;
 						rule += " -i " + nextLink.interfaceId + " -o " + l.interfaceId;
 						rule += " -m state" + " --state ";
 						rule += (protocol.equals("icmp")) ? "NEW,ESTABLISHED" : "ESTABLISHED";
