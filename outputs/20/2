@@ -29,15 +29,15 @@ COMMIT
 -A FORWARD -p tcp --sport 29623:29667 --dport 58392:58417 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 58392:58417 --dport 29623:29667 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 32154:32175 --dport 3443:3445 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 4.0.0.0/7 -d 54.0.0.0/7 -i eth0 -o eth2 -m state --state NEW,ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 54.0.0.0/7 -d 4.0.0.0/7 -i eth2 -o eth0 -m state --state ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 4.0.0.0/7 -d 54.0.0.0/7 -i eth0 -o eth2 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 54.0.0.0/7 -d 4.0.0.0/7 -i eth2 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 47464:47561 --dport 21549:21648 -s 4.0.0.0/7 -d 54.0.0.0/7 -i eth0 -o eth2 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 21549:21648 --dport 47464:47561 -s 54.0.0.0/7 -d 4.0.0.0/7 -i eth2 -o eth0 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 9052:9123 --dport 40525:40562 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 17315:17344 --dport 37297:37374 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 24609:24624 --dport 57914:57999 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 57914:57999 --dport 24609:24624 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state ESTABLISHED -j ACCEPT
@@ -47,8 +47,8 @@ COMMIT
 -A FORWARD -p tcp --sport 57137:57184 --dport 37767:37794 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 46118:46215 --dport 45206:45272 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 45206:45272 --dport 46118:46215 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 54.0.0.0/7 -d 60.0.0.0/7 -i eth2 -o eth3 -m state --state NEW,ESTABLISHED -j ACCEPT
--A FORWARD -p icmp --sport 0:0 --dport 0:0 -s 60.0.0.0/7 -d 54.0.0.0/7 -i eth3 -o eth2 -m state --state ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 54.0.0.0/7 -d 60.0.0.0/7 -i eth2 -o eth3 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A FORWARD -p icmp --icmp-type any -s 60.0.0.0/7 -d 54.0.0.0/7 -i eth3 -o eth2 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 60975:60984 --dport 25960:26038 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 20817:20881 --dport 44010:44096 -s 4.0.0.0/7 -d 10.0.0.0/7 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 44010:44096 --dport 20817:20881 -s 10.0.0.0/7 -d 4.0.0.0/7 -i eth1 -o eth0 -m state --state ESTABLISHED -j ACCEPT

@@ -67,30 +67,41 @@ public class Communication {
 					Subnet nextSubnet = nextLink.subnet;
 
 					// TODO was ist mit unidirectional
-					String state = ((direction.equals("bidirectional")|| direction.equals("unidirectional")) ? "NEW,ESTABLISHED" : "ESTABLISHED");
+					String state = ((direction.equals("bidirectional") || direction.equals("unidirectional"))
+							? "NEW,ESTABLISHED"
+							: "ESTABLISHED");
 
-					String rule = "-A FORWARD" + " -p " + protocol + " --sport " + sourcePortStart + ":" + sourcePortEnd
-							+ " --dport " + targetPortStart + ":" + targetPortEnd + " -s " + s.ipAndPrefix + " -d "
-							+ nextSubnet.ipAndPrefix + " -i " + l.interfaceId + " -o " + nextLink.interfaceId
-							+ " -m state" + " --state " + state + " -j ACCEPT" + "\n";
+					String rule = "-A FORWARD";
+					rule += " -p " + protocol;
+					rule += (protocol.equals("icmp")) ? " --icmp-type any" : "";
+					rule += (protocol.equals("icmp")) ? "" : " --sport " + sourcePortStart + ":" + sourcePortEnd;
+					rule += (protocol.equals("icmp")) ? "" : " --dport " + targetPortStart + ":" + targetPortEnd;
+					rule += " -s " + s.ipAndPrefix + " -d " + nextSubnet.ipAndPrefix;
+					rule += " -i " + l.interfaceId + " -o " + nextLink.interfaceId;
+					rule += " -m state" + " --state " + state + " -j ACCEPT" + "\n";
 
 					rulesForThisRouter += rule;
 
 					// "add inverse rule"
 					if (direction.equals("bidirectional")) {
-						rule = "-A FORWARD" + " -p " + protocol + " --sport " + targetPortStart + ":" + targetPortEnd
-								+ " --dport " + sourcePortStart + ":" + sourcePortEnd + " -s " + nextSubnet.ipAndPrefix
-								+ " -d " + s.ipAndPrefix + " -i " + nextLink.interfaceId + " -o " + l.interfaceId
-								+ " -m state" + " --state " + "ESTABLISHED" + " -j ACCEPT" + "\n";
-						
-								rulesForThisRouter += rule;
+						rule = "-A FORWARD";
+						rule += " -p " + protocol;
+						rule += (protocol.equals("icmp")) ? " --icmp-type any" : "";
+						rule += (protocol.equals("icmp")) ? "" : " --sport " + targetPortStart + ":" + targetPortEnd;
+						rule += (protocol.equals("icmp")) ? "" : " --dport " + sourcePortStart + ":" + sourcePortEnd;
+						rule += " -s " + nextSubnet.ipAndPrefix + " -d " + s.ipAndPrefix;
+						rule += " -i " + nextLink.interfaceId + " -o " + l.interfaceId;
+						rule += " -m state" + " --state ";
+						rule += (protocol.equals("icmp")) ? "NEW,ESTABLISHED" : "ESTABLISHED";
+						rule += " -j ACCEPT" + "\n";
+
+						rulesForThisRouter += rule;
 
 					}
 
-					
 				}
 
-				result.add(new Pair<Router,String>(r,rulesForThisRouter));
+				result.add(new Pair<Router, String>(r, rulesForThisRouter));
 			}
 
 			return result;
