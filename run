@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo "Run your project here."
-java -jar runIPTABLES-jar-with-dependencies.jar
+java -jar runIPTABLES-jar-with-dependencies.jar "$@"
