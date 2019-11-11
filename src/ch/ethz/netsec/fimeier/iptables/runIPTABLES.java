@@ -41,6 +41,8 @@ public class runIPTABLES {
 				}
 				case "-o": {
 					outputDir = args[i + 1];
+					if (!outputDir.endsWith("/"))
+						outputDir = outputDir +"/";
 					System.out.println("outputDir: " + outputDir);
 					break;
 				}
