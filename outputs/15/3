@@ -33,5 +33,5 @@ COMMIT
 -A FORWARD -p tcp --sport 34944:35026 --dport 47530:47539 -s 8.0.0.0/5 -d 48.0.0.0/5 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p icmp --icmp-type any -s 48.0.0.0/5 -d 8.0.0.0/5 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p icmp --icmp-type any -s 8.0.0.0/5 -d 48.0.0.0/5 -i eth0 -o eth1 -m state --state NEW,ESTABLISHED -j ACCEPT
-
+-A FORWARD -j DROP
 COMMIT

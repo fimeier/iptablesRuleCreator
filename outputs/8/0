@@ -100,5 +100,5 @@ COMMIT
 -A FORWARD -p icmp --icmp-type any -s 0.0.0.0/6 -d 48.0.0.0/6 -i eth0 -o eth12 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 24793:24864 --dport 57454:57491 -s 44.0.0.0/6 -d 60.0.0.0/6 -i eth11 -o eth15 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 57454:57491 --dport 24793:24864 -s 60.0.0.0/6 -d 44.0.0.0/6 -i eth15 -o eth11 -m state --state ESTABLISHED -j ACCEPT
-
+-A FORWARD -j DROP
 COMMIT

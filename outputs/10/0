@@ -100,5 +100,5 @@ COMMIT
 -A FORWARD -p udp --sport 17982:18031 --dport 20643:20694 -s 76.0.0.0/6 -d 60.0.0.0/6 -i eth19 -o eth15 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p icmp --icmp-type any -s 76.0.0.0/6 -d 72.0.0.0/6 -i eth19 -o eth18 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p icmp --icmp-type any -s 72.0.0.0/6 -d 76.0.0.0/6 -i eth18 -o eth19 -m state --state NEW,ESTABLISHED -j ACCEPT
-
+-A FORWARD -j DROP
 COMMIT

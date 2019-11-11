@@ -100,5 +100,5 @@ COMMIT
 -A FORWARD -p tcp --sport 11125:11141 --dport 13618:13623 -s 64.0.0.0/6 -d 36.0.0.0/6 -i eth16 -o eth9 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 13618:13623 --dport 11125:11141 -s 36.0.0.0/6 -d 64.0.0.0/6 -i eth9 -o eth16 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 57443:57521 --dport 60590:60644 -s 40.0.0.0/6 -d 36.0.0.0/6 -i eth10 -o eth9 -m state --state NEW,ESTABLISHED -j ACCEPT
-
+-A FORWARD -j DROP
 COMMIT

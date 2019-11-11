@@ -69,5 +69,5 @@ COMMIT
 -A FORWARD -p udp --sport 34628:34725 --dport 61916:61962 -s 32.0.0.0/4 -d 0.0.0.0/4 -i eth2 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 20090:20146 --dport 39683:39750 -s 16.0.0.0/4 -d 0.0.0.0/4 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p udp --sport 39683:39750 --dport 20090:20146 -s 0.0.0.0/4 -d 16.0.0.0/4 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
-
+-A FORWARD -j DROP
 COMMIT

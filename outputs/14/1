@@ -41,5 +41,5 @@ COMMIT
 -A FORWARD -p tcp --sport 37384:37420 --dport 20220:20226 -s 40.0.0.0/5 -d 0.0.0.0/5 -i eth2 -o eth0 -m state --state ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 22986:23022 --dport 20945:20982 -s 16.0.0.0/5 -d 0.0.0.0/5 -i eth1 -o eth0 -m state --state NEW,ESTABLISHED -j ACCEPT
 -A FORWARD -p tcp --sport 20945:20982 --dport 22986:23022 -s 0.0.0.0/5 -d 16.0.0.0/5 -i eth0 -o eth1 -m state --state ESTABLISHED -j ACCEPT
-
+-A FORWARD -j DROP
 COMMIT

@@ -66,7 +66,8 @@ public class IPTableRules {
             +":OUTPUT DROP [0:0]"+ "\n"
             +":FORWARD DROP [0:0]"+ "\n"
 
-            + r.rules+ "\n"
+            + r.rules
+            + "-A FORWARD -j DROP" + "\n"
             + "COMMIT" + "\n";
             rules.add(new Tripple<String, String, String>(testID, routerID, rule));
         }
