@@ -64,10 +64,10 @@ public class IPTableRules {
             +"* filter"+ "\n"
             +":INPUT DROP [0:0]"+ "\n"
             +":OUTPUT DROP [0:0]"+ "\n"
-            +":FORWARD DROP [0:0]"+ "\n"
+            +":FORWARD DROP [0:0]"+ "\n";
 
-            + r.rules
-            + "-A FORWARD -j DROP" + "\n"
+            rule += (r.rules!=null)?r.rules:"\n";
+            rule += "-A FORWARD -j DROP" + "\n"
             + "COMMIT" + "\n";
             rules.add(new Tripple<String, String, String>(testID, routerID, rule));
         }
